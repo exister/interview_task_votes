@@ -1,6 +1,16 @@
+import factory
+
 from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.test import APITestCase
+
+
+class UserFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = User
+
+    username = factory.Sequence(lambda n: 'username{0}'.format(n))
+    email = factory.Sequence(lambda n: 'email{0}@test.com'.format(n))
 
 
 class LoginTestCase(APITestCase):
@@ -26,7 +36,9 @@ class LoginTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_login(self):
-        User.objects.create_user('user1', 'user1@test.com', '123456')
+        user = UserFactory.create(username='user1')
+        user.set_password('123456')
+        user.save()
 
         response = self.client.post(self.url, data={
             'username': 'user1',

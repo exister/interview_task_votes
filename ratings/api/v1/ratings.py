@@ -19,15 +19,15 @@ class UpDownVoteMixin:
         return Response(status=status.HTTP_403_FORBIDDEN)
 
     @detail_route(methods=['post'], url_path='vote-up')
-    def vote_up(self, request):
+    def vote_up(self, request, *args, **kwargs):
         return self._vote(request, up=True)
 
     @detail_route(methods=['post'], url_path='vote-down')
-    def vote_down(self, request):
+    def vote_down(self, request, *args, **kwargs):
         return self._vote(request, up=False)
 
     @detail_route(methods=['delete'], url_path='vote-remove')
-    def vote_remove(self, request):
+    def vote_remove(self, request, *args, **kwargs):
         instance = self.get_object()
         rating = instance.get_rating()
 
@@ -38,7 +38,7 @@ class UpDownVoteMixin:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     @detail_route()
-    def votes(self, request):
+    def votes(self, request, *args, **kwargs):
         instance = self.get_object()
         rating = instance.get_rating()
 
@@ -46,4 +46,4 @@ class UpDownVoteMixin:
             'total_up_votes': rating.total_up_votes,
             'total_down_votes': rating.total_down_votes,
             'total_votes': rating.total_votes,
-        }, status=status.HTTP_404_NOT_FOUND)
+        })

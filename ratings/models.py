@@ -36,9 +36,9 @@ class BaseRating(TimeStampedModel, models.Model):
 
 
 class UpDownRating(BaseRating):
-    total_up_votes = models.IntegerField()
-    total_down_votes = models.IntegerField()
-    total_votes = models.IntegerField()
+    total_up_votes = models.IntegerField(default=0)
+    total_down_votes = models.IntegerField(default=0)
+    total_votes = models.IntegerField(default=0)
 
     class Meta:
         abstract = True
