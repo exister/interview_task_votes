@@ -12,4 +12,19 @@ class CommentViewSet(
     mixins.ListModelMixin,
     GenericViewSet
 ):
+    """
+    API endpoint that allows to vote for comments.
+
+    vote_up:
+    Vote +1 for comment.
+
+    vote_down:
+    Vote -1 for comment.
+
+    vote_remove:
+    Remove current user's vote for comment.
+
+    votes:
+    Get total votes for comment.
+    """
     queryset = Comment.objects.all()

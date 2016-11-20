@@ -1,7 +1,8 @@
 from django.conf.urls import url
-from rest_framework.authtoken.views import obtain_auth_token
+
+from .api.v1.login import LoginAPIView
 
 
 urlpatterns = [
-    url(r'^login/$', obtain_auth_token, name='login')
+    url(r'^login/$', LoginAPIView.as_view(), name='login')
 ]
