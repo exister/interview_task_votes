@@ -8,7 +8,7 @@ from ratings.models import UpDownRating, BaseVote
 
 class Comment(TimeStampedModel, models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
-    publication = models.ForeignKey('publications.Publication', related_name='comments', on_delete=models.CASCADE)
+    publication = models.ForeignKey('rex_publications.Publication', related_name='comments', on_delete=models.CASCADE)
     text = models.TextField()
 
     def __str__(self):
